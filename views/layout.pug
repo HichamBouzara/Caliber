@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    include ./layouts/head
+
+    block styles
+      link(rel='stylesheet', href='/vendor/bootstrap/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/vendor/font-awesome/css/font-awesome.min.css')
+      link(rel='stylesheet', href='/css/fontastic.css')
+      link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700')
+      link(rel='stylesheet', href='/css/grasp_mobile_progress_circle-1.0.0.min.css')
+      link(rel='stylesheet', href='/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css')
+      link#theme-stylesheet(rel='stylesheet', href='/css/style.default.css')
+      link(rel='stylesheet', href='/css/custom.css')
+      link(rel='shortcut icon', href='/img/favicon.ico')
+
+  body
+    block side-navbar
+      include ./layouts/side-navbar
+    .page(style='')
+      block content
+          include ./layouts/header
+
+      block footer
+        include ./layouts/footer.pug
+    block scripts
+      script(src='vendor/jquery/jquery.min.js')
+      script(src='vendor/popper.js/umd/popper.min.js')
+      script(src='vendor/bootstrap/js/bootstrap.min.js')
+      script(src='js/grasp_mobile_progress_circle-1.0.0.min.js')
+      script(src='vendor/jquery.cookie/jquery.cookie.js')
+      script(src='vendor/chart.js/Chart.min.js')
+      script(src='vendor/jquery-validation/jquery.validate.min.js')
+      script(src='vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js')
+      script(src='js/front.js')

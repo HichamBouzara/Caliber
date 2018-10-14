@@ -4,21 +4,22 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var app = express();
 var mongoose = require('mongoose');
-var exphbs  = require('express3-handlebars');
 var fs = require('fs');
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
+app.set('views', __dirname + '/views');
+app.set('view engine', 'pug')
 
 app.use(cookieParser('keyboard cat'));
 app.use(session({ secret: 'keyboard cat', key: 'sid', cookie: { secure: false }}));
 app.use(bodyParser());
- 
+
+app.use(express.static(__dirname + '/public'));
+
 
 // Connect to mongodb
 var connect = function () {
   var options = { server: { socketOptions: { keepAlive: 1 } } }
-  mongoose.connect('mongodb://localhost/etherpad-app', options)
+  mongoose.connect('mongodb://localhost/salleDeSport', options)
 }
 connect()
 

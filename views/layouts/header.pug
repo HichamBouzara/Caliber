@@ -1,0 +1,109 @@
+header.header
+  nav.navbar
+    .container-fluid
+      .navbar-holder.d-flex.align-items-center.justify-content-between
+        .navbar-header
+          a#toggle-btn.menu-btn(href='#')
+            i.icon-bars  
+          a.navbar-brand(href='index.html')
+            .brand-text.d-none.d-md-inline-block
+              strong.text-primary Gestion
+              span.mx-2 Salle de sport 
+        ul.nav-menu.list-unstyled.d-flex.flex-md-row.align-items-md-center
+          // Notifications dropdown
+          li.nav-item.dropdown
+            a#notifications.nav-link(rel='nofollow', data-target='#', href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+              i.fa.fa-bell
+              span.badge.badge-warning 12
+            ul.dropdown-menu(aria-labelledby='notifications')
+              li
+                a.dropdown-item(rel='nofollow', href='#')
+                  .notification.d-flex.justify-content-between
+                    .notification-content
+                      i.fa.fa-envelope
+                      | You have 6 new messages
+                    .notification-time
+                      small 4 minutes ago
+              li
+                a.dropdown-item(rel='nofollow', href='#')
+                  .notification.d-flex.justify-content-between
+                    .notification-content
+                      i.fa.fa-twitter
+                      | You have 2 followers
+                    .notification-time
+                      small 4 minutes ago
+              li
+                a.dropdown-item(rel='nofollow', href='#')
+                  .notification.d-flex.justify-content-between
+                    .notification-content
+                      i.fa.fa-upload
+                      | Server Rebooted
+                    .notification-time
+                      small 4 minutes ago
+              li
+                a.dropdown-item(rel='nofollow', href='#')
+                  .notification.d-flex.justify-content-between
+                    .notification-content
+                      i.fa.fa-twitter
+                      | You have 2 followers
+                    .notification-time
+                      small 10 minutes ago
+              li
+                a.dropdown-item.all-notifications.text-center(rel='nofollow', href='#')
+                  strong
+                    i.fa.fa-bell
+                    | view all notifications
+          // Messages dropdown
+          li.nav-item.dropdown
+            a#messages.nav-link(rel='nofollow', data-target='#', href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+              i.fa.fa-envelope
+              span.badge.badge-info 10
+            ul.dropdown-menu(aria-labelledby='notifications')
+              li
+                a.dropdown-item.d-flex(rel='nofollow', href='#')
+                  .msg-profile
+                    img.img-fluid.rounded-circle(src='img/avatar-1.jpg', alt='...')
+                  .msg-body
+                    h3.h5 Jason Doe
+                    span sent you a direct message
+                    small 3 days ago at 7:58 pm - 10.06.2014
+              li
+                a.dropdown-item.d-flex(rel='nofollow', href='#')
+                  .msg-profile
+                    img.img-fluid.rounded-circle(src='img/avatar-2.jpg', alt='...')
+                  .msg-body
+                    h3.h5 Frank Williams
+                    span sent you a direct message
+                    small 3 days ago at 7:58 pm - 10.06.2014
+              li
+                a.dropdown-item.d-flex(rel='nofollow', href='#')
+                  .msg-profile
+                    img.img-fluid.rounded-circle(src='img/avatar-3.jpg', alt='...')
+                  .msg-body
+                    h3.h5 Ashley Wood
+                    span sent you a direct message
+                    small 3 days ago at 7:58 pm - 10.06.2014
+              li
+                a.dropdown-item.all-notifications.text-center(rel='nofollow', href='#')
+                  strong
+                    i.fa.fa-envelope
+                    | Read all messages
+          // Languages dropdown
+          li.nav-item.dropdown
+            a#languages.nav-link.language.dropdown-toggle(rel='nofollow', data-target='#', href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+              img(src='img/flags/16/GB.png', alt='English')
+              span.d-none.d-sm-inline-block English
+            ul.dropdown-menu(aria-labelledby='languages')
+              li
+                a.dropdown-item(rel='nofollow', href='#')
+                  img.mr-2(src='img/flags/16/DE.png', alt='English')
+                  span German
+              li
+                a.dropdown-item(rel='nofollow', href='#')
+                  img.mr-2(src='img/flags/16/FR.png', alt='English')
+                  span French 
+          // Log out
+          li.nav-item
+            a.nav-link.logout(href='login.html')
+              span.d-none.d-sm-inline-block Se déconnecter
+              i.fa.fa-sign-out

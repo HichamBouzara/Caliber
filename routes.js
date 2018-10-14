@@ -1,26 +1,15 @@
 
-var defaultController = require('./controller/default.js');
-
-var secure = function(req, res, next){
-	if (req.session.user) {
-	    next();
-	  } else {
-	    req.session.error = 'Access denied!';
-	    res.redirect('/login');
-	  }
-}
+var adherentController = require('./controller/adherent.js');
 
 module.exports = function(app){
 
-	app.get('/', defaultController.index);
-	app.all('/register', defaultController.register);
+	app.get('/adherents', adherentController.list);
+	app.post('/adherents', adherentController.create);
+	app.get('/adherents/:id', adherentController.read);
+	app.put('/adherents/:id', adherentController.update);
+	app.delete('/adherents/:id', adherentController.delete);
 
-	app.all('/login', defaultController.login);
-	app.get('/logout', secure, defaultController.logout);
-
-	app.get('/restricted', secure, function(req, res){
-		res.send('restricted');
+	app.get('/abonnements', (req, res) =>	{
+		res.render('abonnements')
 	});
-
 }
-

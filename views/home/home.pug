@@ -1,0 +1,51 @@
+append content
+  .breadcrumb-holder
+    .container-fluid
+      ul.breadcrumb
+        li.breadcrumb-item
+          a(href='index.html') Home
+        li.breadcrumb-item.active Adherents 
+  section
+    .container-fluid
+      // Page Header
+      header
+        .row
+          .col-md-6
+            h1.h3.display.m-3 Adherents
+          .col-md-6.text-right
+            a.btn.btn-primary.btn-lg(href='#', data-toggle='modal', data-target='#ajouter_adherent_modal')
+              | Ajouter Adherent
+              br
+      .row
+        .col-lg-12
+          .card
+            .card-header
+              h4 Striped Table
+            .card-body
+              .table-responsive
+                table.table.table-striped
+                  thead
+                    tr
+                      th #
+                      th First Name
+                      th Last Name
+                      th Username
+                  tbody
+                    tr
+                      th(scope='row') 1
+                      td Mark
+                      td Otto
+                      td @mdo
+                    tr
+                      th(scope='row') 2
+                      td Jacob
+                      td Thornton
+                      td @fat
+                    tr
+                      th(scope='row') 3
+                      td Larry
+                      td the Bird
+                      td @twitter 
+
+append scripts
+  include ./home.js
