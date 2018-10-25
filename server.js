@@ -19,7 +19,7 @@ app.use(express.static(__dirname + '/public'));
 // Connect to mongodb
 var connect = function () {
   var options = { server: { socketOptions: { keepAlive: 1 } } }
-  mongoose.connect('mongodb://localhost/salleDeSport', options)
+  mongoose.connect('mongodb://localhost/devfest', options)
 }
 connect()
 
