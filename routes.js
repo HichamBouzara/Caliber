@@ -40,6 +40,9 @@ var passport = require('passport'),
 	 });
 module.exports = function(app){
 
+	app.get('/', (req, res) =>	{
+		res.redirect('workgroups');
+	});
 	app.get('/users', userController.list);
 	app.post('/users', userController.create);
 	app.get('/users/:id', userController.read);

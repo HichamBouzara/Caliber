@@ -18,6 +18,7 @@ Workgroup.find().exec((err, w) => {
 
 exports.read = function(req, res){
 var workgroup = req.params.id;
+console.log(workgroup);
 Workgroup.findById(workgroup).exec((err, w) =>{
         if (err) return res.status(500).send(err);
         if (!w) {
@@ -30,6 +31,7 @@ Workgroup.findById(workgroup).exec((err, w) =>{
 }
 
 exports.create = (req, res) =>	{
+    console.log('creating');
 var workgroup = req.body.workgroup;
 Workgroup.create(workgroup, (err, w) =>	{
     if (err) return res.status(500).send(err);

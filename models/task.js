@@ -11,7 +11,7 @@ var Task = new Schema({
         type: String,
         trim: true
     },
-    end_date: {
+    deadline: {
         type: String,
         required: true,
         trim: true

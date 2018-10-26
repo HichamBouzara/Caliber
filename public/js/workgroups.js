@@ -4,7 +4,7 @@ $('#createWorkgroup').click(() => {
         "penality": $('#challengeTitle').val(),
     }
 
-    $.post('workgroups', { "workgroup": workgroup }, (c) => {
+    $.post('/workgroups', { "workgroup": workgroup }, (c) => {
         location.reload();
     });
   });
