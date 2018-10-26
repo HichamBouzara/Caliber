@@ -12,7 +12,7 @@ append content
               .col-md-12.h-100.d-flex.flex-column.justify-content-between
                 .row.p-0
                   .col-md-12.text-center
-                    a.btn.btn-primary.w-75(data-toggle='modal', data-target='#ajouter_adherent_modal', href='') Create Workgroup
+                    a.btn.btn-primary.w-75(data-toggle='modal', data-target='#deletePricingModal', href='', id='create-workgroup') Create Workgroup
     .row
       .col-md-12
         h1 My workgroups
@@ -26,30 +26,19 @@ append content
                   each w in args.workgroups
                     .col-md-12.text-center.py-2
                       a.btn.btn-primary.w-75(href='#')= w.title
-
-
-  #ajouter_adherent_modal.modal.text-left(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
-    .modal-dialog.modal-lg(role='document')
-    .modal-content
-      .modal-header
-        h5#exampleModalLabel.modal-title New workgroup
-        button.close(type='button', data-dismiss='modal', aria-label='Close')
-          span(aria-hidden='true') ×
-      .modal-body
-          div
-            .container
-              .row.p-0
-                .col-md-12.p-0
-                  .form-group
-                    label(for='form16', style='') Title
-                    input#workgroup-title.form-control.text-primary.form-control-sm(type='text', placeholder='Name')
-                  .form-group
-                    label(for='form18') Penalty
-                    input#workgroup-penality.form-control.form-control-sm(type='text', placeholder='Penality')
-                  .form-group
-                    label(for='form18') Deadline
-                    input#workgroup-deadline.form-control.form-control-sm(type='date', placeholder='date')
-                  .form-group.text-center
-                    button#submitWorkgroup.btn.btn-primary.text-center.w-75(type='submit', style='') Submit
+    #deletePricingModal.modal.fade
+      .modal-dialog
+          .modal-content
+              form
+                  .modal-header
+                      h4.modal-title Supression
+                      button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+                  .modal-body
+                      p Confirmer la supression du pricing
+                      p.text-warning
+                          small Cette opération est irreversible
+                  .modal-footer
+                      input.btn.btn-default(type='button', value='Annuler', data-dismiss='modal')
+                      input.btn.btn-danger(type='button', value='Supprimer', id='deletePricingButton')
   script(src='https://code.jquery.com/jquery-3.3.1.min.js')
-  script(src='js/workgroups.js')
+  script(src='/js/workgroups.js')
