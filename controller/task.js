@@ -27,7 +27,9 @@ Task.findById(task).exec((err, t) =>{
 }
 
 exports.create = (req, res) =>	{
+    console.log('cccccccccccc');
 var task = req.body.task;
+console.log('cccc');
 Task.create(task, (err, t) =>	{
     if (err) return res.status(500).send(err);
     if (!t) {

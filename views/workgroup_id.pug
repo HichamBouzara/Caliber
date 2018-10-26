@@ -4,84 +4,67 @@ html
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', type='text/css')
-    link(rel='stylesheet', href='/css/theme.css', type='text/css')
-  body.d-flex.flex-column.justify-content-start(style='')
-    nav.navbar.navbar-expand-md.navbar-dark.bg-primary.p-1
+    link(rel='stylesheet', href='https://static.pingendo.com/bootstrap/bootstrap-4.1.3.css')
+  body
+    nav.navbar.bg-primary.navbar-dark
       .container
-        button.navbar-toggler.navbar-toggler-right.border-0(type='button', data-toggle='collapse', data-target='#navbar16')
-          span.navbar-toggler-icon
-        a.navbar-brand.p-0(href='#')
-          i.fa.d-inline.fa-lg.fa-stop-circle
-          b  BRAND
-        #navbar16.collapse.navbar-collapse
-          a.btn.navbar-btn.ml-md-2.btn-light.text-dark Contact us
-          ul.navbar-nav.ml-auto
-            li.nav-item
-              a.nav-link(href='#') Features
-            li.nav-item
-              a.nav-link(href='#') Pricing
-            li.nav-item
-              a.nav-link(href='#') About
-            li.nav-item
-              a.nav-link(href='#') FAQ
-    .p-1(style='')
-      .container.text-center.d-flex.flex-column.justify-content-between
-        .row
-          .text-center.col-md-12
-            h2(contenteditable='true') Workgroupe title
-        .row
-          .container
-            .row
-              .text-center.col-md-6.w-25.d-flex.flex-column.justify-content-center
-                img.img-fluid.d-block.float-left(src='/img/potion.png', width='100')
-              .col-md-6.p-1.w-75
-                h6.bg-danger.text-light.rounded.p-1.px-2.text-center
-                  strong Challenge
-                p.lead.text-danger the loser will organize the chamber !
-        .row.text-center
-          .col-md-12.rounded.col-lg-12.py-2
-            h3(contenteditable='true') My tasks
+        a.navbar-brand(href='#')
+          i.fa.d-inline.fa-lg.fa-circle
+          b  TASKILI
+    .py-3(style='')
+      .container
         .row
           .col-md-12
-            .row
-              .col-md-12.text-right
-                a.btn.btn-primary.m-1.w-25(href='#', data-toggle='modal', data-target='#newTaskModal') Add
-            .row
-              .col-md-12
-                ul.list-group
-                  li.list-group-item.d-flex.justify-content-between.align-items-center
-                    | Cras justo odio 
-                    span.badge.badge-primary.badge-pill 14
-                  li.list-group-item.d-flex.justify-content-between.align-items-center
-                    | Dapibus ac facilisis in 
-                    span.badge.badge-primary.badge-pill 2
-                  li.list-group-item.d-flex.justify-content-between.align-items-center
-                    | Morbi leo risus 
-                    span.badge.badge-primary.badge-pill 1
-    #newTaskModal.modal(style='display: none;', aria-hidden='true')
+            h1= args.workgroup.title
+        .row
+          .col-md-12
+            p.lead Challenge:  
+              span=args.workgroup.penality
+        .row
+          .col-md-12.text-right.py-2
+            a.btn.btn-primary.w-50.btn-lg(href='#', data-toggle='modal', data-target='#createWorkgroupModal') Add Task
+        .row
+          .col-md-12
+            each task in args.tasks
+              .card.m-1(style='')
+                .card-header.p-1
+                  button.close(type='button', data-dismiss='modal')
+                    span(style='') ×
+                .card-body.p-2
+                  h4= task.libelle
+                  h6.text-muted Deadline: 
+                    span= task.deadline
+                  p= task.description
+
+
+    #createWorkgroupModal.modal
       .modal-dialog(role='document')
         .modal-content
           .modal-header
-            h5.modal-title Modal title
+            h5.modal-title Create task
             button.close(type='button', data-dismiss='modal')
               span ×
-          .modal-body
-            .col-md-12(style='')
-              .row
-                .form-group.w-100
-                  label(for='form16', style='') Title
-                  input#form16.form-control.text-primary(type='text', placeholder='Title')
-              .row
-                .form-group.w-100
-                  label(for='form16', style='') Description
-                  input#form16.form-control.text-primary(type='text', placeholder='Description')
-              .row
-                .form-group.w-100
-                  label(for='form16', style='') Deadline
-                  input#form16.form-control.text-primary(type='date', placeholder='Deadline')
+          .modal-body.p-3
+            .row
+              .col-md-12(style='')
+                .row
+                  .form-group.w-100
+                    label(for='form16') Title
+                    input#taskTitle.form-control.text-primary(type='text', placeholder='Title')
+                .row
+                  .form-group.w-100
+                    label(for='form16') Description
+                    input#taskDescription.form-control.text-primary(type='text', placeholder='Description')
+                .row
+                  .form-group.w-100
+                    label(for='form16') Deadline
+                    input#taskDeadline.form-control.text-primary(type='date', placeholder='Deadline')
           .modal-footer
-            button.btn.btn-primary(type='button') Save changes
+            button#createTask.btn.btn-primary(type='button') Create
             button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+    script.
+      var args = !{JSON.stringify(args)}
     script(src='https://code.jquery.com/jquery-3.3.1.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js', integrity='sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49', crossorigin='anonymous')
     script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', integrity='sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy', crossorigin='anonymous')
+    script(src='/js/workgroups_id.js')

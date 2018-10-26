@@ -7,7 +7,7 @@ var WorkGroup = new Schema({
         required: true,
         trim: true
     },
-    penalty: {
+    penality: {
         type: String,
     }
 }, { timestamps: true });
