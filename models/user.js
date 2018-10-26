@@ -18,14 +18,12 @@ var User = new Schema({
         type: String,
         required: true,
       },
-      passwordConf: {
-        type: String,
-        required: true,
-      }
 }, {timestamps: true});
 
 User.method({
-
+  validPassword: function (pass)  {
+    console.log("is right? = " + (this.password == pass));
+  }
 })
 
 

@@ -5,6 +5,9 @@ var session = require('express-session');
 var app = express();
 var mongoose = require('mongoose');
 var fs = require('fs');
+const flash = require('connect-flash');
+var passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy;
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug')
@@ -14,6 +17,14 @@ app.use(session({ secret: 'keyboard cat', key: 'sid', cookie: { secure: false }}
 app.use(bodyParser());
 
 app.use(express.static(__dirname + '/public'));
+app.use(require('cookie-parser')());
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+
+//Passport
 
 
 // Connect to mongodb

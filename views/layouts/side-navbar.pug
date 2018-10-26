@@ -1,56 +1,18 @@
-nav.side-navbar.mCustomScrollbar._mCS_1.mCS_no_scrollbar
-        #mCSB_1.mCustomScrollBox.mCS-light.mCSB_vertical.mCSB_inside(tabindex='0', style='max-height: none;')
-          #mCSB_1_container.mCSB_container.mCS_y_hidden.mCS_no_scrollbar_y(style='position:relative; top:0; left:0;', dir='ltr')
-            .side-navbar-wrapper
-              // Sidebar Header
-              .sidenav-header.d-flex.align-items-center.justify-content-center
-                // User Info
-                .sidenav-header-inner.text-center
-                  img.img-fluid.rounded-circle.mCS_img_loaded(src='img/avatar-7.jpg', alt='person')
-                  h2.h5 ahmed abdellah
-                  span Résponsable de la salle
-                // Small Brand information, appears on minimized sidebar
-                .sidenav-header-logo
-                  a.brand-small.text-center(href='index.html')
-                    strong B
-                    strong.text-primary D
-              // Sidebar Navigation Menus
-              .main-menu
-                h5.sidenav-heading GENERAL
-                ul#side-main-menu.side-menu.list-unstyled
-                  li
-                    a(href='pointage.html')
-                      i.icon-grid
-                      | Pointage
-                  li
-                    a(href='adherents')
-                      i.icon-form
-                      | Adherents
-                      br
-                  li
-                    a(href='abonnements')
-                      i.fa.fa-bar-chart
-                      | Abonnements
-                  li
-                    a.collapsed(href='#exampledropdownDropdown', aria-expanded='false', data-toggle='collapse')
-                      i.icon-interface-windows
-                      | La salle
-                    ul#exampledropdownDropdown.list-unstyled.collapse(style='')
-                      li
-                        a(href='#') Case
-                      li
-                        a(href='#') Page
-                      li
-                        a(href='#') Page
-              .admin-menu
-                h5.sidenav-heading Avancée
-                ul#side-admin-menu.side-menu.list-unstyled
-                  li
-                    a(href='index.html')
-                      i.icon-screen  
-                      | Statistiques
-          #mCSB_1_scrollbar_vertical.mCSB_scrollTools.mCSB_1_scrollbar.mCS-light.mCSB_scrollTools_vertical(style='display: none;')
-            .mCSB_draggerContainer
-              #mCSB_1_dragger_vertical.mCSB_dragger(style='position: absolute; min-height: 50px; height: 0px; top: 0px;')
-                .mCSB_dragger_bar(style='line-height: 50px;')
-              .mCSB_draggerRail
+nav.navbar.navbar-expand-md.navbar-dark.bg-primary.p-1
+  .container
+    button.navbar-toggler.navbar-toggler-right.border-0(type='button', data-toggle='collapse', data-target='#navbar16')
+      span.navbar-toggler-icon
+    a.navbar-brand.p-0(href='#')
+      i.fa.d-inline.fa-lg.fa-stop-circle
+      b  DoerDIE
+    #navbar16.collapse.navbar-collapse
+      a.btn.navbar-btn.ml-md-2.btn-light.text-dark Contact us
+      ul.navbar-nav.ml-auto
+        li.nav-item
+          a.nav-link(href='#') Features
+        li.nav-item
+          a.nav-link(href='#') Pricing
+        li.nav-item
+          a.nav-link(href='#') About
+        li.nav-item
+          a.nav-link(href='#') FAQ
