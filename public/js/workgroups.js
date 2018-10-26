@@ -1,8 +1,7 @@
-$('#submitWorkgroup').click(() => {
+$('#createWorkgroup').click(() => {
     var workgroup = {
-        "title": $('#workgroup-title').val(),
-        "penality": $('#workgroup-penality').val(),
-        "deadline": $('#workgroup-deadline').val(),
+        "title": $('#workgroupTitle').val(),
+        "penality": $('#challengeTitle').val(),
     }
 
     $.post('workgroups', { "workgroup": workgroup }, (c) => {

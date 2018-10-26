@@ -7,10 +7,6 @@ var WorkGroup = new Schema({
         required: true,
         trim: true
     },
-    deadline: {
-        type: String,
-        required: true,
-    },
     penalty: {
         type: String,
     }

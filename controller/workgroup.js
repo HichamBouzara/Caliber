@@ -24,9 +24,7 @@ Workgroup.findById(workgroup).exec((err, w) =>{
             err = new Error('Read: workgroup non trouvee');
             return res.status(404).send(err);
         }
-        console.log('test');
-        res.render('workgroup');
-        //res.send(w);
+        res.render('workgroup_id');
     }
 );
 }
