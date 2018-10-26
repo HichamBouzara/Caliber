@@ -9,6 +9,14 @@ var WorkGroup = new Schema({
     },
     penality: {
         type: String,
+    },
+    users: [{
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+    }],
+    judge: {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
     }
 }, { timestamps: true });
 

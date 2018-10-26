@@ -12,4 +12,11 @@ $(document).ready(() => {
             location.reload();
         });
       });
+    $('.add-judge').click(() => {
+        console.log($(this));
+        /*$.post('/judge', { "task": task }, (t) => {
+            location.reload();
+        });*/
+    });
 });
+

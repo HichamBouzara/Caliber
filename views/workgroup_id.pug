@@ -21,8 +21,13 @@ html
             p.lead Challenge:  
               span=args.workgroup.penality
         .row
-          .col-md-12.text-right.py-2
-            a.btn.btn-primary.w-50.btn-lg(href='#', data-toggle='modal', data-target='#createWorkgroupModal') Add Task
+          .col-md-12.text-right.py-2(style='')
+            .btn-group
+              a.btn.btn-success.mx-2(href='#', data-toggle='modal', data-target='#participantsModal')
+                i.fa.fa-user.fa-fw.fa-lg.my-2
+                | Members
+              a.btn.btn-primary.py-2(href='#', data-toggle='modal', data-target='#createWorkgroupModal') Add Task
+
         .row
           .col-md-12
             each task in args.tasks
@@ -62,6 +67,64 @@ html
           .modal-footer
             button#createTask.btn.btn-primary(type='button') Create
             button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+  #participantsModal.modal
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          h5.modal-title Members
+          button.close(type='button', data-dismiss='modal')
+            span ×
+        .modal-body.py-2
+          .row
+            .col-md-12(style='')
+              .row.py-2
+                .col-lg-12.px-4.px-md-0
+                  .row
+                    .col-md-12
+                      p.lead Judge
+                  if args.workgroup.judge
+                    .row.border-top.border-bottom.py-2
+                      .col-3.d-flex.flex-column.justify-content-center
+                        img.img-fluid.d-block.mx-auto.rounded-circle(src='/img/man.png', width='150', alt='Card image cap')
+                      .col-9.d-flex.flex-column.justify-content-center
+                        h5
+                          b= args.workgroup.judge.username
+                    
+                  else
+                    .row.border-top.border-bottom.py-2
+                      .col-9.d-flex.flex-column.justify-content-center
+                        h5
+                          b Not exists yet!
+
+
+          .row
+            .col-md-12(style='')
+              .row.py-0
+                .col-lg-12.px-4.px-md-0
+                  .row
+                    .col-md-12.p-0
+                      p.lead.py-2 Participants
+                  .row
+                    .col-md-12.text-right.p-0
+                      form.form-inline
+                        .input-group
+                          input.form-control.m-2(type='email', placeholder='Name of participant')
+                          .input-group-append
+                            a.btn.btn-danger.m-2(href='#', style='	border-top-left-radius: 200px;	border-top-right-radius: 200px;	border-bottom-left-radius: 200px;	border-bottom-right-radius: 200px;')
+                              i.fa.fa-fw.fa-plus
+                  each user in args.workgroup.users            
+                    .row.border-top.border-bottom.py-2
+                      .col-3.d-flex.flex-column.justify-content-center.col-md-4
+                        img.img-fluid.d-block.mx-auto.rounded-circle(src='/img/man.png', width='150', alt='Card image cap')
+                      .d-flex.flex-column.justify-content-center.col-7.col-md-4
+                        h5
+                          b= user.username
+                      if (!args.workgroup.judge)
+                        .d-flex.flex-column.justify-content-center.col-2.p-0.m-0
+                          a.btn.btn-success.add-judge(href='#', id= user._id, style='	border-top-left-radius: 200px;	border-top-right-radius: 200px;	border-bottom-left-radius: 200px;	border-bottom-right-radius: 200px;')
+                            i.fa.fa-fw.fa-gavel
+
+
     script.
       var args = !{JSON.stringify(args)}
     script(src='https://code.jquery.com/jquery-3.3.1.min.js')

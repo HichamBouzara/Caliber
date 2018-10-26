@@ -1,7 +1,8 @@
 
-var mongoose = require('mongoose'),
-Workgroup = mongoose.model('workgroup');
-Task = mongoose.model('task');
+var mongoose = require('mongoose');
+var Workgroup = mongoose.model('workgroup');
+var Task = mongoose.model('task');
+var User = mongoose.model('user');
 
 exports.list = function(req, res){
 Workgroup.find().exec((err, w) => {
@@ -18,8 +19,8 @@ Workgroup.find().exec((err, w) => {
 }
 
 exports.read = function(req, res){
-var workgroup = req.params.id;
-Workgroup.findById(workgroup).exec((err, w) =>{
+var workgroup = req.params.id;  
+Workgroup.findById(workgroup).populate('users').populate('judge').exec((err, w) =>{
         if (err) return res.status(500).send(err);
         if (!w) {
             err = new Error('Read: workgroup non trouvee');
@@ -31,13 +32,12 @@ Workgroup.findById(workgroup).exec((err, w) =>{
         Task.find({workgroup: w._id}).exec((err, t) =>  {
             args.tasks = t;
             res.render('workgroup_id', {"args": args});
-        });       
+        });
     }
 );
 }
 
 exports.create = (req, res) =>	{
-    console.log('creating');
 var workgroup = req.body.workgroup;
 Workgroup.create(workgroup, (err, w) =>	{
     if (err) return res.status(500).send(err);
