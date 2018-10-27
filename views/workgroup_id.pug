@@ -4,52 +4,71 @@ html
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', type='text/css')
-    link(rel='stylesheet', href='https://static.pingendo.com/bootstrap/bootstrap-4.1.3.css')
-  body
+    link(rel='stylesheet', href='/css/theme.css')
+  body.bg-light
     nav.navbar.bg-primary.navbar-dark
       .container
         a.navbar-brand(href='#')
           i.fa.d-inline.fa-lg.fa-circle
-          b  TASKILI
-    .py-3(style='')
+          b  BRAND
+    .h-100.py-1(style='')
       .container
+        .row.py-2
+          .col-md-6.text-center.d-flex.flex-row.align-items-center.justify-content-start.col-8.m-1.px-3
+            h3.text-primary.my-1    
+              b= args.workgroup.title
+          .col-md-6.text-center.p-0.m-0.d-flex.flex-column.align-items-center.col-3.justify-content-center
+            a.btn.btn-primary(href='#', style='	border-top-left-radius: 50px;	border-top-right-radius: 50px;	border-bottom-left-radius: 50px;	border-bottom-right-radius: 50px;', data-toggle='modal', data-target='#membersModal')
+              | Members 
+              i.fa.fa-users.fa-fw
         .row
           .col-md-12
-            h1= args.workgroup.title
+            .card.mx-2(style='	box-shadow: 2px 2px 4px  #b9b9b9;')
+              .card-header.bg-danger.py-0(style='opacity: .7;')
+                h4.my-1.text-white.text-center Challenge
+              .card-body.p-2
+                p.m-0.text-center= args.workgroup.penality
         .row
-          .col-md-12
-            p.lead Challenge:  
-              span=args.workgroup.penality
+          .col-md-12.d-flex.text-left.flex-column.align-items-start.justify-content-center.m-2
+            h3.text-primary.d-flex.flex-column.align-items-end.justify-content-end.my-2
+              b My Tasks
+        if (args.tasks.length == 0)
+          .ph-2.d-flex.flex-row.justify-content-center.align-items-center
+            .container
+              .row
+                .col-md-12.d-flex.justify-content-center.align-items-center.flex-column
+                  h5.text-muted There is no task
+
+        each task in args.tasks
+          .row.my-2
+            .col-md-12.mx-2(style='')
+              .card(style='	box-shadow: 1.5px 1.5px 5px  #b9b9b9;')
+                .card-header.py-1
+                  .row
+                    .col-md-4.col-6.d-flex.flex-row.justify-content-center.align-items-center
+                      h4.my-1= task.libelle
+                    .col-md-4.p-0.d-flex.flex-column.justify-content-center.align-items-center.col-4
+                      .progress.my-1.w-100
+                        .progress-bar.m-0.progress-bar-striped.bg-success.w-25(role='progressbar', style='width:25%') 25%
+                    .col-md-4.col-2.d-flex.flex-column.text-right.justify-content-center.align-items-end
+                      button.close.text-center.d-flex.flex-column.justify-content-center.align-items-center.m-0(type='button', data-dismiss='modal')
+                        span.text-center.d-flex.flex-column.justify-content-center.align-items-center.m-0(style='') ×
+                .card-body.d-flex.flex-column.justify-content-center.align-items-start.p-2
+                  h6.text-muted= task.deadline
+                  p.m-0= task.description
         .row
-          .col-md-12.text-right.py-2(style='')
-            .btn-group
-              a.btn.btn-success.mx-2(href='#', data-toggle='modal', data-target='#participantsModal')
-                i.fa.fa-user.fa-fw.fa-lg.my-2
-                | Members
-              a.btn.btn-primary.py-2(href='#', data-toggle='modal', data-target='#createWorkgroupModal') Add Task
-
-        .row
-          .col-md-12
-            each task in args.tasks
-              .card.m-1(style='')
-                .card-header.p-1
-                  button.close(type='button', data-dismiss='modal')
-                    span(style='') ×
-                .card-body.p-2
-                  h4= task.libelle
-                  h6.text-muted Deadline: 
-                    span= task.deadline
-                  p= task.description
-
-
-    #createWorkgroupModal.modal
+          .col-md-12.py-2.text-left.h-100.d-flex.flex-column
+            a.btn.btn-primary.btn-lg.fixed-bottom.m-3.w-25(href='#', data-toggle='modal', data-target='#createWorkgroupModal', style='	border-top-left-radius: 100px;	border-top-right-radius: 100px;	border-bottom-left-radius: 100px;	border-bottom-right-radius: 100px;')
+              i.fa.fa-fw.fa-plus-circle
+              |  Task
+    #createWorkgroupModal.modal(aria-hidden='true', style='display: none;')
       .modal-dialog(role='document')
         .modal-content
-          .modal-header
-            h5.modal-title Create task
-            button.close(type='button', data-dismiss='modal')
-              span ×
-          .modal-body.p-3
+          .modal-header.bg-primary.py-2
+            h5.modal-title.text-white Add Task
+            button.close.text-white(type='button', data-dismiss='modal')
+              span.text-white(style='') ×
+          .modal-body.px-4
             .row
               .col-md-12(style='')
                 .row
@@ -65,71 +84,51 @@ html
                     label(for='form16') Deadline
                     input#taskDeadline.form-control.text-primary(type='date', placeholder='Deadline')
           .modal-footer
-            button#createTask.btn.btn-primary(type='button') Create
-            button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-  #participantsModal.modal
-    .modal-dialog(role='document')
-      .modal-content
-        .modal-header
-          h5.modal-title Members
-          button.close(type='button', data-dismiss='modal')
-            span ×
-        .modal-body.py-2
-          .row
-            .col-md-12(style='')
-              .row.py-2
-                .col-lg-12.px-4.px-md-0
-                  .row
-                    .col-md-12
-                      p.lead Judge
-                  if args.workgroup.judge
-                    .row.border-top.border-bottom.py-2
-                      .col-3.d-flex.flex-column.justify-content-center
-                        img.img-fluid.d-block.mx-auto.rounded-circle(src='/img/man.png', width='150', alt='Card image cap')
-                      .col-9.d-flex.flex-column.justify-content-center
-                        h5
-                          b= args.workgroup.judge.username
-                    
-                  else
-                    .row.border-top.border-bottom.py-2
-                      .col-9.d-flex.flex-column.justify-content-center
-                        h5
-                          b Not exists yet!
-
-
-          .row
-            .col-md-12(style='')
-              .row.py-0
-                .col-lg-12.px-4.px-md-0
-                  .row
-                    .col-md-12.p-0
-                      p.lead.py-2 Participants
-                  .row
-                    .col-md-12.text-right.p-0
-                      form.form-inline
-                        .input-group
-                          input.form-control.m-2.autocomplete(type='email', placeholder='Name of participant')
-
-
-                          .input-group-append
-                            a.btn.btn-danger.m-2(href='#', style='	border-top-left-radius: 200px;	border-top-right-radius: 200px;	border-bottom-left-radius: 200px;	border-bottom-right-radius: 200px;')
-                              i.fa.fa-fw.fa-plus
-                  each user in args.workgroup.users            
-                    .row.border-top.border-bottom.py-2
-                      .col-3.d-flex.flex-column.justify-content-center.col-md-4
-                        img.img-fluid.d-block.mx-auto.rounded-circle(src='/img/man.png', width='150', alt='Card image cap')
-                      .d-flex.flex-column.justify-content-center.col-7.col-md-4
-                        h5
-                          b= user.username
-                      if (!args.workgroup.judge)
-                        .d-flex.flex-column.justify-content-center.col-2.p-0.m-0
-                          a.btn.btn-success.add-judge(href='#', id= user._id, style='	border-top-left-radius: 200px;	border-top-right-radius: 200px;	border-bottom-left-radius: 200px;	border-bottom-right-radius: 200px;')
-                            i.fa.fa-fw.fa-gavel
-
-
+            button#createTask.btn.btn-primary.w-25(type='button') Add
+    #membersModal.modal(style='display: none;', aria-hidden='true')
+      .modal-dialog(role='document')
+        .modal-content
+          .modal-header.bg-primary.p-2
+            h5.modal-title.text-white Members
+            button.close.text-white(type='button', data-dismiss='modal')
+              span.text-white(style='') ×
+          .modal-body.py-2
+            .row
+              .col-md-12.my-2
+                .card
+                  .card-header.text-center.d-flex.flex-column.justify-content-center.align-items-center.p-1
+                    h5.my-1 Judge
+                  .card-body.p-0
+                    .row.py-1
+                      .col-lg-12.px-4.px-md-0
+                        .row.py-2
+                          .d-flex.flex-column.justify-content-center.col-md-12.align-items-center.w-100
+                            h5.my-1
+                              b Doesn't exists yet!
+            .row
+              .col-md-12.my-2
+                .card
+                  .card-body.p-0
+                    .row.py-0
+                      .col-lg-12.px-4.px-md-0
+                        .row
+                          .col-md-12.text-right.p-0.d-flex.flex-row.justify-content-center.align-items-center
+                            form.form-inline.w-100.my-1
+                              .input-group.d-flex.justify-content-center.align-items-center.flex-row
+                                input.form-control.w-100.m-1(type='email', placeholder='Enter to add new participant')
+                        each user in args.workgroup.users      
+                          .row.border-top.border-bottom.py-2
+                            .col-3.d-flex.flex-column.justify-content-center.col-md-4.align-items-center
+                              img.img-fluid.d-block.mx-auto.rounded-circle(src='/img/man.png', width='150', alt='Card image cap')
+                            .d-flex.flex-column.justify-content-center.col-7.col-md-4.align-items-start
+                              h5
+                                b= user.username
+                            .d-flex.justify-content-center.col-2.flex-row.align-items-center
+                              a.btn.m-2.btn-success.text-center.d-flex.flex-row.justify-content-center.align-items-center.btn-lg(href='#', style='	max-height: 40px;	max-width: 40px;	min-height: 40px;	min-width: 40px;	height: 40px;	width: 40px;')
+                                i.fa.fa-balance-scale.fa-fw.my-1
     script.
       var args = !{JSON.stringify(args)}
     script(src='https://code.jquery.com/jquery-3.3.1.min.js')
+    script(src='/js/workgroups_id.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js', integrity='sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49', crossorigin='anonymous')
     script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', integrity='sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy', crossorigin='anonymous')
-    script(src='/js/workgroups_id.js')
