@@ -31,10 +31,40 @@ Workgroup.findById(workgroup).populate('users').populate('judge').exec((err, w) 
         }
         Task.find({workgroup: w._id}).exec((err, t) =>  {
             args.tasks = t;
-            res.render('workgroup_id', {"args": args});
+            User.find().exec((err, u) =>{
+                    args.users = u;
+                    res.render('workgroup_id', {"args": args});
+                }
+            );
         });
     }
 );
+}
+exports.addUser= (req, res) =>	{
+
+    var d = req.body.d;
+
+    Workgroup.findByIdAndUpdate(d.workgroup_id, {$addToSet:{users: d.user_id}}, (err, w) =>	{
+        if (err) return res.status(500).send(err);
+        if (!w) {
+            err = new Error('Update: workgroup non trouvée');
+            return res.status(404).send(err);
+        }
+        res.send(w);
+    });
+}
+exports.addJudge= (req, res) =>	{
+
+    var d = req.body.d;
+
+    Workgroup.findByIdAndUpdate(d.workgroup_id, {judge: d.user_id}, (err, w) =>	{
+        if (err) return res.status(500).send(err);
+        if (!w) {
+            err = new Error('Update: workgroup non trouvée');
+            return res.status(404).send(err);
+        }
+        res.send(w);
+    });
 }
 
 exports.create = (req, res) =>	{

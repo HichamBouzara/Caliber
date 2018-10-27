@@ -49,6 +49,10 @@ module.exports = function(app){
 	app.put('/users/:id', userController.update);
 	app.delete('/users/:id', userController.delete);
 
+	app.post('/addMember', workgroupController.addUser);
+
+	app.post('/addJudge', workgroupController.addJudge);
+
 	app.get('/workgroups', workgroupController.list);
 	app.post('/workgroups', workgroupController.create);
 	app.get('/workgroups/:id', workgroupController.read);

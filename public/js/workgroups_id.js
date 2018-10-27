@@ -1,5 +1,5 @@
 $(document).ready(() => {
-    $('#createTask').click(() => {
+    $('#createTask').click(() => {  
         var task = {
             "libelle": $('#taskTitle').val(),
             "description": $('#taskDescription').val(),
@@ -12,44 +12,28 @@ $(document).ready(() => {
             location.reload();
         });
     });
-    $('.add-judge').click(() => {
-        console.log($(this));
-        /*$.post('/judge', { "task": task }, (t) => {
-            location.reload();
-        });*/
+    $("#participantsList").on('input', function () {
+        var val = this.value;
+        var memberInList = $('#membersList').find('option').filter(function(){
+            return this.value.toUpperCase() === val.toUpperCase();        
+        })
+        var d = {
+            "user_id": memberInList.attr('id'),
+            "workgroup_id": args.workgroup._id
+        }
+        if(memberInList.length) {
+            $.post('/addMember', { "d": d }, (u) => {
+                location.reload();
+            });
+        }
     });
 });
-
-$(document).on("focus keyup", "input.autocomplete", function () {
-    // Cache useful selectors
-    var $input = $(this);
-    var $dropdown = $input.next("ul.dropdown-menu");
-
-    // Create the no matches entry if it does not exists yet
-    if (!$dropdown.data("containsNoMatchesEntry")) {
-        $("input.autocomplete + ul.dropdown-menu").append('<li class="no-matches hidden"><a>No matches</a></li>');
-        $dropdown.data("containsNoMatchesEntry", true);
+function addJudge(user_id)  {
+    var d = {
+        "user_id": user_id,
+        "workgroup_id": args.workgroup._id
     }
-
-    // Show only matching values
-    $dropdown.find("li:not(.no-matches)").each(function (key, li) {
-        var $li = $(li);
-        $li[new RegExp($input.val(), "i").exec($li.text()) ? "removeClass" : "addClass"]("hidden");
+    $.post('/addJudge', { "d": d }, (u) => {
+        location.reload();
     });
-
-    // Show a specific entry if we have no matches
-    $dropdown.find("li.no-matches")[$dropdown.find("li:not(.no-matches):not(.hidden)").length > 0 ? "addClass" : "removeClass"]("hidden");
-});
-$(document).on("click", "input.autocomplete + ul.dropdown-menu li", function (e) {
-    // Prevent any action on the window location
-    e.preventDefault();
-
-    // Cache useful selectors
-    $li = $(this);
-    $input = $li.parent("ul").prev("input");
-
-    // Update input text with selected entry
-    if (!$li.is(".no-matches")) {
-        $input.val($li.text());
-    }
-});
+}

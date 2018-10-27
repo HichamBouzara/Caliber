@@ -102,7 +102,15 @@ html
                     .row.py-1
                       .col-lg-12.px-4.px-md-0
                         .row.py-2
-                          .d-flex.flex-column.justify-content-center.col-md-12.align-items-center.w-100
+                          if (args.workgroup.judge)
+                            .d-flex.flex-column.justify-content-center.col-md-12.align-items-center.w-100
+                              .row.border-top.border-bottom.py-2
+                                .col-3.d-flex.flex-column.justify-content-center.col-md-6.align-items-center
+                                  img.img-fluid.d-block.mx-auto.rounded-circle(src='/img/man.png', width='150', alt='Card image cap')
+                                .d-flex.flex-column.justify-content-center.col-7.col-md-6.align-items-center
+                                  h5
+                                    b= args.workgroup.judge.username
+                          else 
                             h5.my-1
                               b Doesn't exists yet!
             .row
@@ -115,7 +123,11 @@ html
                           .col-md-12.text-right.p-0.d-flex.flex-row.justify-content-center.align-items-center
                             form.form-inline.w-100.my-1
                               .input-group.d-flex.justify-content-center.align-items-center.flex-row
-                                input.form-control.w-100.m-1(type='email', placeholder='Enter to add new participant')
+                                input#participantsList.form-control.w-100.m-1(placeholder='Enter to add new participant', autocomplete='off', list='membersList')
+                                datalist#membersList
+                                  each user in args.users
+                                    option(class='member-option', id=user._id)= user.username
+
                         each user in args.workgroup.users      
                           .row.border-top.border-bottom.py-2
                             .col-3.d-flex.flex-column.justify-content-center.col-md-4.align-items-center
@@ -123,9 +135,10 @@ html
                             .d-flex.flex-column.justify-content-center.col-7.col-md-4.align-items-start
                               h5
                                 b= user.username
-                            .d-flex.justify-content-center.col-2.flex-row.align-items-center
-                              a.btn.m-2.btn-success.text-center.d-flex.flex-row.justify-content-center.align-items-center.btn-lg(href='#', style='	max-height: 40px;	max-width: 40px;	min-height: 40px;	min-width: 40px;	height: 40px;	width: 40px;')
-                                i.fa.fa-balance-scale.fa-fw.my-1
+                            if(!args.workgroup.judge)
+                              .d-flex.justify-content-center.col-2.flex-row.align-items-center
+                                a.btn.m-2.btn-success.text-center.d-flex.flex-row.justify-content-center.align-items-center.btn-lg(onclick='addJudge("' + user._id + '")',href='#', style='	max-height: 40px;	max-width: 40px;	min-height: 40px;	min-width: 40px;	height: 40px;	width: 40px;')
+                                  i.fa.fa-balance-scale.fa-fw.my-1
     script.
       var args = !{JSON.stringify(args)}
     script(src='https://code.jquery.com/jquery-3.3.1.min.js')
